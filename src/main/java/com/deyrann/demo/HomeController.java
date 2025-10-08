@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -16,45 +15,49 @@ import java.util.Optional;
 public class HomeController {
 
     @Autowired
-    private ApplicationRequestRepository requestRepository;
+    private ApplicationRequestService requestService; // Inject the new Service
+
 
     @GetMapping("/")
     public String index(Model model) {
-        List<ApplicationRequest> requests = requestRepository.findAll();
+        List<ApplicationRequest> requests = requestService.getAllRequests();
         model.addAttribute("requests", requests);
-        return "index"; // index.html
+        model.addAttribute("title", "Все Заявки");
+        return "index";
     }
 
     @GetMapping("/new_requests")
     public String newRequests(Model model) {
-        List<ApplicationRequest> requests = requestRepository.findAllByHandledFalse();
+        List<ApplicationRequest> requests = requestService.getNewRequests();
         model.addAttribute("requests", requests);
+        model.addAttribute("title", "Новые Заявки");
         return "index";
     }
 
     @GetMapping("/processed_requests")
     public String processedRequests(Model model) {
-        List<ApplicationRequest> requests = requestRepository.findAllByHandledTrue();
+        List<ApplicationRequest> requests = requestService.getProcessedRequests();
         model.addAttribute("requests", requests);
+        model.addAttribute("title", "Обработанные Заявки");
         return "index";
     }
+
 
     @GetMapping("/add_request")
     public String addRequestForm(Model model) {
         model.addAttribute("request", new ApplicationRequest());
-        return "add_request"; // add_request.html
+        return "add_request";
     }
 
     @PostMapping("/add_request")
     public String addRequest(@ModelAttribute("request") ApplicationRequest request) {
-        request.setHandled(false);
-        requestRepository.save(request);
+        requestService.addRequest(request);
         return "redirect:/";
     }
 
     @GetMapping("/details/{id}")
     public String requestDetails(@PathVariable Long id, Model model) {
-        Optional<ApplicationRequest> optionalRequest = requestRepository.findById(id);
+        Optional<ApplicationRequest> optionalRequest = requestService.getRequest(id);
         if (optionalRequest.isPresent()) {
             model.addAttribute("request", optionalRequest.get());
             return "details";
@@ -64,18 +67,13 @@ public class HomeController {
 
     @PostMapping("/handle_request/{id}")
     public String handleRequest(@PathVariable Long id) {
-        Optional<ApplicationRequest> optionalRequest = requestRepository.findById(id);
-        if (optionalRequest.isPresent()) {
-            ApplicationRequest request = optionalRequest.get();
-            request.setHandled(true);
-            requestRepository.save(request);
-        }
+        requestService.handleRequest(id);
         return "redirect:/details/" + id;
     }
 
     @PostMapping("/delete_request/{id}")
     public String deleteRequest(@PathVariable Long id) {
-        requestRepository.deleteById(id);
+        requestService.deleteRequest(id);
         return "redirect:/";
     }
 }

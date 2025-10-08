@@ -7,10 +7,8 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 class="mb-4">
-        <span th:if="${#httpServletRequest.requestURI == '/'}">Все Заявки</span>
-        <span th:if="${#httpServletRequest.requestURI == '/new_requests'}">Новые Заявки</span>
-        <span th:if="${#httpServletRequest.requestURI == '/processed_requests'}">Обработанные Заявки</span>
+    <h1 class="mb-4" th:text="${title}">
+        Список Заявок
     </h1>
 
     <div class="row row-cols-1 row-cols-md-2 g-4">
