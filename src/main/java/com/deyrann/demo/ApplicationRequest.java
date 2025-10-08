@@ -17,21 +17,20 @@ public class ApplicationRequest {
     private Long id;
 
     @Column(name = "user_name", nullable = false)
-    private String userName = ""; // Initialize to empty string
+    private String userName = "";
 
     @Column(name = "course_name")
-    private String courseName = ""; // Initialize to empty string
+    private String courseName = "";
 
     @Column(columnDefinition = "TEXT")
-    private String commentary = ""; // Initialize to empty string
+    private String commentary = "";
 
     @Column(name = "phone")
-    private String phone = ""; // Initialize to empty string
+    private String phone = "";
 
     @Column(name = "is_handled")
-    private boolean handled = false; // Set default explicitly
+    private boolean handled = false;
 
-    // Custom constructor for new requests
     public ApplicationRequest(String userName, String courseName, String commentary, String phone) {
         this.userName = userName;
         this.courseName = courseName;

@@ -15,7 +15,7 @@ import java.util.Optional;
 public class HomeController {
 
     @Autowired
-    private ApplicationRequestService requestService; // Inject the new Service
+    private ApplicationRequestService requestService;
 
 
     @GetMapping("/")
