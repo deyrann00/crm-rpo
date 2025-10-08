@@ -30,12 +30,4 @@ public class ApplicationRequest {
 
     @Column(name = "is_handled")
     private boolean handled = false;
-
-    public ApplicationRequest(String userName, String courseName, String commentary, String phone) {
-        this.userName = userName;
-        this.courseName = courseName;
-        this.commentary = commentary;
-        this.phone = phone;
-        this.handled = false;
-    }
 }

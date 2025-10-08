@@ -9,6 +9,6 @@ import java.util.List;
 public interface ApplicationRequestRepository extends JpaRepository<ApplicationRequest, Long> {
 
     List<ApplicationRequest> findAllByHandledFalse();
-    
+
     List<ApplicationRequest> findAllByHandledTrue();
 }
