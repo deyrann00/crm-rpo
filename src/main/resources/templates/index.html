@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Список Заявок</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1 class="mb-4">
+        <span th:if="${#httpServletRequest.requestURI == '/'}">Все Заявки</span>
+        <span th:if="${#httpServletRequest.requestURI == '/new_requests'}">Новые Заявки</span>
+        <span th:if="${#httpServletRequest.requestURI == '/processed_requests'}">Обработанные Заявки</span>
+    </h1>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col" th:each="request : ${requests}">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <span th:if="${!request.handled}" class="text-danger">*(Новая)*</span>
+                        Заявка от <span th:text="${request.userName}">Ильяс Жунышев</span>
+                    </h5>
+                    <p class="card-text mb-1">
+                        **Курс:** <span th:text="${request.courseName}">Java Standard Edition</span>
+                    </p>
+                    <p class="card-text mb-2 text-muted" th:text="${request.commentary}">
+                        Хотле спросить вас, а сколько будет длиться сам курс?
+                    </p>
+                    <p class="card-text">
+                        **Тел:** <span th:text="${request.phone}">+77027777777</span>
+                        <a th:href="@{'/details/' + ${request.id}}" class="card-link">Подробнее</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
