@@ -36,6 +36,9 @@
   </form>
 
   <div class="d-flex justify-content-start">
+
+    <a th:href="@{'/edit/' + ${request.id}}" class="btn btn-primary me-2">Редактировать</a>
+
     <form th:if="${!request.handled}" th:action="@{'/handle_request/' + ${request.id}}" method="post" class="me-2">
       <button type="submit" class="btn btn-success">Обработать заявку</button>
     </form>

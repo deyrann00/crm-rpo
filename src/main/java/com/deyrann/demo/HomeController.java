@@ -117,4 +117,43 @@ public class HomeController {
         requestRepository.deleteById(id);
         return "redirect:/";
     }
+
+    @GetMapping("/edit/{id}")
+    public String editRequestForm(Model model, @PathVariable Long id) {
+        Optional<ApplicationRequest> optionalRequest = requestRepository.findById(id);
+
+        if (optionalRequest.isPresent()) {
+            model.addAttribute("request", optionalRequest.get());
+            return "edit";
+        }
+        return "redirect:/";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editRequest(
+            @PathVariable Long id,
+            @RequestParam(name = "userName") String userName,
+            @RequestParam(name = "courseName") String courseName,
+            @RequestParam(name = "commentary") String commentary,
+            @RequestParam(name = "phone") String phone,
+            @RequestParam(name = "handled") boolean handled)
+    {
+        Optional<ApplicationRequest> optionalRequest = requestRepository.findById(id);
+
+        if (optionalRequest.isPresent()) {
+            ApplicationRequest request = optionalRequest.get();
+
+            request.setUserName(userName);
+            request.setCourseName(courseName);
+            request.setCommentary(commentary);
+            request.setPhone(phone);
+            request.setHandled(handled);
+
+            requestRepository.save(request);
+
+            return "redirect:/details/" + id;
+        }
+
+        return "redirect:/";
+    }
 }
