@@ -50,7 +50,7 @@ public class HomeController {
         List<ApplicationRequest> requests = new ArrayList<>();
 
         for (ApplicationRequest request : allRequests) {
-            if (!request.isHandled()) {
+            if (request.isHandled()) {
                 requests.add(request);
             }
         }
