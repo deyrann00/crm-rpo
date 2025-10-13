@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,16 @@ public class HomeController {
 
     @GetMapping("/new_requests")
     public String newRequests(Model model) {
-        List<ApplicationRequest> requests = requestRepository.findAllByHandledFalse();
+        List<ApplicationRequest> allRequests = requestRepository.findAll();
+
+        List<ApplicationRequest> requests = new ArrayList<>();
+
+        for (ApplicationRequest request : allRequests) {
+            if (!request.isHandled()) {
+                requests.add(request);
+            }
+        }
+
         model.addAttribute("requests", requests);
         model.addAttribute("title", "Новые Заявки");
         return "index";
@@ -35,7 +45,16 @@ public class HomeController {
 
     @GetMapping("/processed_requests")
     public String processedRequests(Model model) {
-        List<ApplicationRequest> requests = requestRepository.findAllByHandledTrue();
+        List<ApplicationRequest> allRequests = requestRepository.findAll();
+
+        List<ApplicationRequest> requests = new ArrayList<>();
+
+        for (ApplicationRequest request : allRequests) {
+            if (!request.isHandled()) {
+                requests.add(request);
+            }
+        }
+
         model.addAttribute("requests", requests);
         model.addAttribute("title", "Обработанные Заявки");
         return "index";
