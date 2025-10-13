@@ -17,16 +17,16 @@ public class ApplicationRequest {
     private Long id;
 
     @Column(name = "user_name")
-    private String userName = "";
+    private String userName;
 
     @Column(name = "course_name")
-    private String courseName = "";
+    private String courseName;
 
-    @Column(columnDefinition = "TEXT")
-    private String commentary = "";
+    @Column(name = "commentary")
+    private String commentary;
 
     @Column(name = "phone")
-    private String phone = "";
+    private String phone;
 
     @Column(name = "is_handled")
     private boolean handled = false;
