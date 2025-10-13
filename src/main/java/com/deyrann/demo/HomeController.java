@@ -111,10 +111,4 @@ public class HomeController {
 
         return "redirect:/details/" + id;
     }
-
-    @PostMapping("/delete_request/{id}")
-    public String deleteRequest(@PathVariable Long id) {
-        requestRepository.deleteById(id);
-        return "redirect:/";
-    }
 }
