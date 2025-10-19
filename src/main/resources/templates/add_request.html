@@ -16,11 +16,13 @@
     </div>
 
     <div class="mb-3">
-      <label for="courseName" class="form-label">Курс :</label>
-      <select th:field="*{courseName}" id="courseName" class="form-select">
-        <option value="">Выберите курс</option>
-        <option value="Java Standard Edition"></option>
-        <option value="Web Technologies"></option>
+      <label for="course">Выберите курс:</label>
+      <select id="course" name="course" class="form-select">
+        <option value="">-- Выберите курс --</option>
+        <th:block th:each="course : ${courses}">
+          <option th:value="${course.id}"
+                  th:text="${course.name + ' — ' + course.price + '$'}"></option>
+        </th:block>
       </select>
     </div>
 

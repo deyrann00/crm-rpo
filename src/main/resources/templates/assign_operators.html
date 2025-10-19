@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Назначить операторов</title>
+</head>
+<body>
+<div class="container mt-4">
+    <h3>Выберите операторов для заявки №<span th:text="${request.id}"></span></h3>
+    <form th:action="@{'/assign_operators/' + ${request.id}}" method="post">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Выбрать</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Департамент</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="op : ${operators}">
+                <td><input type="checkbox" name="operatorIds" th:value="${op.id}"></td>
+                <td th:text="${op.name}"></td>
+                <td th:text="${op.surname}"></td>
+                <td th:text="${op.department}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="d-flex justify-content-end">
+            <a href="#" class="btn btn-secondary me-2" onclick="history.back()">Отмена</a>
+            <button type="submit" class="btn btn-primary">Назначить</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

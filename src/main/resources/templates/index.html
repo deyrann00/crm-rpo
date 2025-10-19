@@ -20,7 +20,7 @@
                         Заявка от <span th:text="${request.userName}">Ильяс Жунышев</span>
                     </h5>
                     <p class="card-text mb-1">
-                        **Курс:** <span th:text="${request.courseName}">Java Standard Edition</span>
+                        **Курс:** <span th:text="${request.course?.name}">Java Standard Edition</span>
                     </p>
                     <p class="card-text mb-2 text-muted" th:text="${request.commentary}">
                         Хотел спросить вас, а сколько будет длиться сам курс?
