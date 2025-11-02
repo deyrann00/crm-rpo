@@ -29,9 +29,9 @@ public class ApplicationRequest {
     @Column(name = "is_handled")
     private boolean handled = false;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Courses course;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Operators> operators;
 }
