@@ -1,4 +1,4 @@
-package com.deyrann.demo;
+package com.deyrann.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

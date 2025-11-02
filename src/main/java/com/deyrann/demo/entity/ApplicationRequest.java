@@ -1,4 +1,4 @@
-package com.deyrann.demo;
+package com.deyrann.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -29,9 +29,9 @@ public class ApplicationRequest {
     @Column(name = "is_handled")
     private boolean handled = false;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Courses course;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Operators> operators;
 }
